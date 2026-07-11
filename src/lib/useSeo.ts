@@ -6,7 +6,7 @@ type SeoOptions = {
   canonicalPath?: string;
 };
 
-const siteUrl = "https://atlas-auto-parts.example";
+const siteUrl = "https://vipauto.ma";
 
 function upsertMeta(selector: string, attribute: "name" | "property", key: string, content: string): void {
   let element = document.head.querySelector<HTMLMetaElement>(selector);

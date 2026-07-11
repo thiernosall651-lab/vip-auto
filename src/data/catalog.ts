@@ -1,8 +1,18 @@
-import type { Category, ContactInfo, Guarantee, Product, Review, VehicleBrand } from "../types/catalog";
+import type {
+  CatalogFamily,
+  Category,
+  ContactInfo,
+  Guarantee,
+  PartnerBrand,
+  Product,
+  Review,
+  VehicleBrand,
+} from "../types/catalog";
 
 export const contactInfo: ContactInfo = {
-  companyName: "Atlas Auto Parts",
-  email: "contact@atlasautoparts.ma",
+  companyName: "VIP AUTO",
+  founder: "Malick",
+  email: "contact@vipauto.ma",
   phone: "+212 5 22 50 25 73",
   whatsapp: "212672479776",
   address: "Boulevard Mohammed VI, Hay Moulay Abdellah",
@@ -26,8 +36,214 @@ export const vehicleBrands: VehicleBrand[] = [
   { id: "renault", name: "Renault" },
   { id: "seat", name: "Seat" },
   { id: "skoda", name: "Skoda" },
+  { id: "toyota", name: "Toyota" },
   { id: "volkswagen", name: "Volkswagen" },
   { id: "volvo", name: "Volvo" },
+];
+
+/** Highlighted marques for the "Nos marques" showcase — logo placeholders ready to be swapped for real assets. */
+export const partnerBrands: PartnerBrand[] = [
+  { id: "mercedes-benz", name: "Mercedes-Benz" },
+  { id: "bmw", name: "BMW" },
+  { id: "audi", name: "Audi" },
+  { id: "toyota", name: "Toyota" },
+  { id: "renault", name: "Renault" },
+  { id: "peugeot", name: "Peugeot" },
+  { id: "hyundai", name: "Hyundai" },
+  { id: "kia", name: "Kia" },
+  { id: "volkswagen", name: "Volkswagen" },
+  { id: "nissan", name: "Nissan" },
+];
+
+/** Full catalogue, grouped into families and rendered as modern cards on the homepage. */
+export const catalogFamilies: CatalogFamily[] = [
+  {
+    id: "fluids",
+    eyebrow: "Lubrifiants",
+    title: "Huiles & Fluides",
+    items: [
+      {
+        id: "engine-oils",
+        name: "Huiles moteur",
+        description: "Lubrifiants synthétiques homologués pour un moteur protégé et performant.",
+        icon: "Droplet",
+      },
+      {
+        id: "brake-fluids",
+        name: "Liquides de frein",
+        description: "DOT 3, DOT 4 et DOT 5.1 pour un freinage précis et sécurisé.",
+        icon: "Droplets",
+      },
+      {
+        id: "transmission-oils",
+        name: "Huiles de transmission",
+        description: "Fluides boîte manuelle et automatique pour des passages souples.",
+        icon: "Cog",
+      },
+      {
+        id: "coolants",
+        name: "Liquides de refroidissement",
+        description: "Antigel longue durée pour maîtriser la température moteur.",
+        icon: "Thermometer",
+      },
+    ],
+  },
+  {
+    id: "filtration",
+    eyebrow: "Filtration",
+    title: "Filtres",
+    items: [
+      {
+        id: "oil-filters",
+        name: "Filtres à huile",
+        description: "Filtration fine pour une huile propre à chaque vidange.",
+        icon: "Filter",
+      },
+      {
+        id: "air-filters",
+        name: "Filtres à air",
+        description: "Admission optimale pour préserver puissance et consommation.",
+        icon: "Wind",
+      },
+      {
+        id: "cabin-filters",
+        name: "Filtres habitacle",
+        description: "Air intérieur sain, anti-pollen et anti-poussière.",
+        icon: "Fan",
+      },
+      {
+        id: "fuel-filters",
+        name: "Filtres à carburant",
+        description: "Protection de l'injection contre les impuretés du carburant.",
+        icon: "Fuel",
+      },
+    ],
+  },
+  {
+    id: "engine-electrical",
+    eyebrow: "Moteur & Énergie",
+    title: "Allumage, Batteries & Électrique",
+    items: [
+      {
+        id: "spark-plugs",
+        name: "Bougies d'allumage",
+        description: "Allumage fiable pour un démarrage franc et une combustion nette.",
+        icon: "Zap",
+      },
+      {
+        id: "batteries",
+        name: "Batteries",
+        description: "Forte puissance de démarrage pour usage urbain et intensif.",
+        icon: "BatteryCharging",
+      },
+      {
+        id: "electrical-parts",
+        name: "Pièces électriques",
+        description: "Alternateurs, démarreurs, capteurs et faisceaux d'origine.",
+        icon: "Cpu",
+      },
+    ],
+  },
+  {
+    id: "braking-chassis",
+    eyebrow: "Sécurité",
+    title: "Freinage & Liaison au sol",
+    items: [
+      {
+        id: "brake-pads",
+        name: "Plaquettes de frein",
+        description: "Freinage progressif et silencieux, compatibilité vérifiée.",
+        icon: "Layers",
+      },
+      {
+        id: "brake-discs",
+        name: "Disques de frein",
+        description: "Disques ventilés et pleins pour une dissipation optimale.",
+        icon: "Disc3",
+      },
+      {
+        id: "suspension",
+        name: "Suspension",
+        description: "Amortisseurs, ressorts et rotules pour un confort maîtrisé.",
+        icon: "Waves",
+      },
+      {
+        id: "steering",
+        name: "Direction",
+        description: "Crémaillères, biellettes et pièces de direction précises.",
+        icon: "LifeBuoy",
+      },
+    ],
+  },
+  {
+    id: "lighting",
+    eyebrow: "Vision",
+    title: "Éclairage",
+    items: [
+      {
+        id: "led-lighting",
+        name: "Éclairage LED",
+        description: "Kits LED haute luminosité pour un éclairage moderne.",
+        icon: "Lightbulb",
+      },
+      {
+        id: "headlights",
+        name: "Phares avant",
+        description: "Optiques et blocs phares pour une visibilité maximale.",
+        icon: "Sun",
+      },
+      {
+        id: "rear-lights",
+        name: "Feux arrière",
+        description: "Feux et clignotants homologués, signalisation impeccable.",
+        icon: "Lamp",
+      },
+    ],
+  },
+  {
+    id: "wheels-tires",
+    eyebrow: "Roulage",
+    title: "Roues & Pneus",
+    items: [
+      {
+        id: "alloy-wheels",
+        name: "Jantes alliage",
+        description: "Jantes premium pour un style affirmé et un poids réduit.",
+        icon: "CircleDashed",
+      },
+      {
+        id: "tires",
+        name: "Pneus",
+        description: "Pneus toutes saisons et performance des meilleures marques.",
+        icon: "Disc",
+      },
+    ],
+  },
+  {
+    id: "accessories-services",
+    eyebrow: "Confort & Atelier",
+    title: "Accessoires, Entretien & Services",
+    items: [
+      {
+        id: "accessories",
+        name: "Accessoires",
+        description: "Équipements auto, multimédia et confort pour votre véhicule.",
+        icon: "Car",
+      },
+      {
+        id: "car-care",
+        name: "Entretien & Detailing",
+        description: "Nettoyants, cires et produits de soin pour une finition parfaite.",
+        icon: "Sparkles",
+      },
+      {
+        id: "mechanical-services",
+        name: "Services mécaniques",
+        description: "Vidange, diagnostic, freinage et installation en atelier.",
+        icon: "Wrench",
+      },
+    ],
+  },
 ];
 
 export const vehicleYears = Array.from({ length: 35 }, (_, index) => 2026 - index);

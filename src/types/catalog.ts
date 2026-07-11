@@ -42,6 +42,28 @@ export type VehicleBrand = {
   name: string;
 };
 
+export type PartnerBrand = {
+  id: string;
+  name: string;
+  /** Optional logo path — a real image can replace the text placeholder later. */
+  logo?: string;
+};
+
+export type CatalogItem = {
+  id: string;
+  name: string;
+  description: string;
+  /** Lucide icon key resolved in the UI layer. */
+  icon: string;
+};
+
+export type CatalogFamily = {
+  id: string;
+  title: string;
+  eyebrow: string;
+  items: CatalogItem[];
+};
+
 export type Review = {
   id: string;
   name: string;
@@ -62,6 +84,7 @@ export type CartItem = {
 
 export type ContactInfo = {
   companyName: string;
+  founder: string;
   email: string;
   phone: string;
   whatsapp: string;

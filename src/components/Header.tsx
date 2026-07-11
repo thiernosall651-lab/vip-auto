@@ -30,7 +30,7 @@ export function Header({ onCartOpen }: HeaderProps): JSX.Element {
         <div className="mx-auto flex max-w-7xl flex-col gap-2 px-4 py-2 text-xs sm:flex-row sm:items-center sm:justify-between">
           <p>Pièces contrôlées, livraison rapide et paiement à la réception.</p>
           <a
-            className="inline-flex items-center gap-2 font-semibold text-amber-300 transition hover:text-white"
+            className="inline-flex items-center gap-2 font-semibold text-red-400 transition hover:text-white"
             href={`https://wa.me/${contactInfo.whatsapp}`}
           >
             <MessageCircle className="h-4 w-4" aria-hidden="true" />
@@ -40,16 +40,20 @@ export function Header({ onCartOpen }: HeaderProps): JSX.Element {
       </div>
 
       <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-4">
-        <Link className="flex items-center gap-3" to="/" aria-label="Retour à l'accueil">
-          <span className="flex h-11 w-11 items-center justify-center rounded bg-signal text-lg font-black text-white">
-            AP
-          </span>
+        <Link className="flex items-center gap-3" to="/" aria-label="VIP AUTO — retour à l'accueil">
+          <img
+            className="h-11 w-auto"
+            src="/images/logo-vip.png"
+            alt="Logo VIP AUTO"
+            width="132"
+            height="44"
+          />
           <span>
             <span className="block text-lg font-black uppercase leading-none tracking-normal text-ink">
-              Atlas Auto Parts
+              VIP AUTO
             </span>
             <span className="text-xs font-semibold uppercase tracking-normal text-slate-500">
-              Pièces auto premium
+              Pièces auto & entretien
             </span>
           </span>
         </Link>

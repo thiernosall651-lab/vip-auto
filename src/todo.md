@@ -2,27 +2,27 @@
 
 ## Branding
 
-- [ ] Replace Atlas Auto Parts
-- [ ] Add VIP AUTO logo
-- [ ] Update colors
-- [ ] Update SEO
+- [x] Replace Atlas Auto Parts
+- [x] Add VIP AUTO logo
+- [x] Update colors
+- [x] Update SEO
 
 ## Homepage
 
-- [ ] New Hero
-- [ ] New Images
-- [ ] Services Section
-- [ ] Brands Section
+- [x] New Hero
+- [ ] New Images (real photos still to replace placeholders)
+- [x] Services Section
+- [x] Brands Section
 
 ## Products
 
-- [ ] Engine Oils
-- [ ] Brake Fluids
-- [ ] Filters
-- [ ] Batteries
-- [ ] Spark Plugs
-- [ ] Brake Pads
-- [ ] Accessories
+- [x] Engine Oils
+- [x] Brake Fluids
+- [x] Filters
+- [x] Batteries
+- [x] Spark Plugs
+- [x] Brake Pads
+- [x] Accessories
 
 ## Services
 

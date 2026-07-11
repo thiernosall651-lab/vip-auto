@@ -29,8 +29,11 @@ export function VehicleFinder(): JSX.Element {
   }
 
   return (
-    <section className="relative z-10 mx-auto -mt-10 max-w-6xl px-4">
-      <form className="rounded border border-slate-200 bg-white p-4 shadow-soft md:p-6" onSubmit={handleSubmit}>
+    <section className="relative z-10 mx-auto -mt-16 max-w-6xl px-4 sm:-mt-20 sm:px-6 lg:-mt-24">
+      <form
+        className="rounded-2xl border border-slate-200/80 bg-white p-4 shadow-[0_24px_60px_-20px_rgba(2,6,23,0.45)] ring-1 ring-black/5 md:p-6"
+        onSubmit={handleSubmit}
+      >
         <div className="grid gap-4 md:grid-cols-[1fr_1fr_auto] md:items-end">
           <label className="grid gap-2 text-sm font-bold text-ink">
             Marque

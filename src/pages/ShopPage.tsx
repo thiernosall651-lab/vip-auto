@@ -26,9 +26,9 @@ export function ShopPage(): JSX.Element {
   }, [search.category]);
 
   useSeo({
-    title: "Boutique pièces auto | Atlas Auto Parts",
+    title: "Boutique pièces auto | VIP AUTO",
     description:
-      "Filtrez les pièces auto par catégorie, marque compatible et recherche texte. Commande rapide avec paiement à la livraison.",
+      "Filtrez les pièces auto VIP AUTO par catégorie, marque compatible et recherche texte. Commande rapide avec paiement à la livraison.",
     canonicalPath: "/shop",
   });
 

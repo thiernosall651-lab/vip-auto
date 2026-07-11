@@ -12,7 +12,7 @@ export function ProductPage(): JSX.Element {
   const product = products.find((currentProduct) => currentProduct.slug === productSlug);
 
   useSeo({
-    title: product ? `${product.name} | Atlas Auto Parts` : "Produit introuvable | Atlas Auto Parts",
+    title: product ? `${product.name} | VIP AUTO` : "Produit introuvable | VIP AUTO",
     description: product
       ? product.description
       : "Le produit demandé n'existe pas ou n'est plus disponible dans le catalogue.",

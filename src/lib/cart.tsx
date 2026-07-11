@@ -13,7 +13,7 @@ type CartContextValue = {
   buildWhatsAppOrderUrl: () => string;
 };
 
-const storageKey = "atlas-auto-parts-cart";
+const storageKey = "vip-auto-cart";
 const CartContext = createContext<CartContextValue | null>(null);
 
 function readStoredCart(): CartItem[] {

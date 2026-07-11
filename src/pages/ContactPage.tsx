@@ -9,9 +9,9 @@ export function ContactPage(): JSX.Element {
   const [message, setMessage] = useState("");
 
   useSeo({
-    title: "Contact | Atlas Auto Parts",
+    title: "Contact | VIP AUTO",
     description:
-      "Contactez Atlas Auto Parts pour vérifier une référence, demander un devis ou commander une pièce auto avec livraison.",
+      "Contactez VIP AUTO à Casablanca pour vérifier une référence, demander un devis ou commander une pièce auto avec livraison.",
     canonicalPath: "/contact",
   });
 

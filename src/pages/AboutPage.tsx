@@ -3,9 +3,9 @@ import { useSeo } from "../lib/useSeo";
 
 export function AboutPage(): JSX.Element {
   useSeo({
-    title: "À propos | Atlas Auto Parts",
+    title: "À propos | VIP AUTO",
     description:
-      "Découvrez le positionnement d'Atlas Auto Parts : pièces contrôlées, conseil humain et expérience e-commerce mobile-first.",
+      "Découvrez VIP AUTO à Casablanca, fondée par Malick : pièces contrôlées, conseil humain et expérience e-commerce mobile-first.",
     canonicalPath: "/about",
   });
 
@@ -13,11 +13,13 @@ export function AboutPage(): JSX.Element {
     <main>
       <section className="bg-ink px-4 py-16 text-white">
         <div className="mx-auto max-w-5xl">
-          <p className="text-sm font-black uppercase tracking-normal text-amber-300">À propos</p>
-          <h1 className="mt-3 text-4xl font-black leading-tight md:text-6xl">Une boutique auto pensée pour la confiance.</h1>
+          <p className="text-sm font-black uppercase tracking-normal text-signal">À propos</p>
+          <h1 className="mt-3 text-4xl font-black leading-tight tracking-tight md:text-6xl">
+            VIP AUTO, une boutique auto pensée pour la confiance.
+          </h1>
           <p className="mt-5 max-w-3xl text-lg leading-8 text-slate-300">
-            Le projet reprend les fondamentaux d’une boutique de pièces auto performante : catalogue clair, preuve sociale,
-            recherche véhicule et commande simple depuis mobile.
+            Fondée par Malick à Casablanca, VIP AUTO réunit les fondamentaux d’une boutique de pièces auto performante :
+            catalogue clair, preuve sociale, recherche véhicule et commande simple depuis mobile.
           </p>
         </div>
       </section>
