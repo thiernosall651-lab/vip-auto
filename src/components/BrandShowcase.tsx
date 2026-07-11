@@ -1,3 +1,4 @@
+import { Link } from "@tanstack/react-router";
 import { partnerBrands } from "../data/catalog";
 import { SectionHeader } from "./SectionHeader";
 
@@ -7,14 +8,17 @@ export function BrandShowcase(): JSX.Element {
       <SectionHeader
         eyebrow="Nos marques"
         title="Compatibles avec les plus grandes marques"
-        description="Des références contrôlées pour les constructeurs les plus répandus au Maroc. Les logos officiels remplaceront prochainement ces emplacements."
+        description="Des pièces et références contrôlées pour les constructeurs les plus répandus, avec compatibilité vérifiée avant chaque expédition."
       />
 
-      <div className="mt-8 grid grid-cols-2 gap-3 sm:grid-cols-3 sm:gap-4 lg:grid-cols-5">
+      <div className="mt-8 grid grid-cols-2 gap-3 sm:grid-cols-3 sm:gap-4 md:grid-cols-5">
         {partnerBrands.map((brand) => (
-          <div
+          <Link
             key={brand.id}
-            className="group flex aspect-[3/2] items-center justify-center rounded-2xl border border-slate-200 bg-white p-4 shadow-sm transition duration-300 hover:-translate-y-1 hover:border-signal/40 hover:shadow-soft"
+            to="/shop"
+            search={{ brand: brand.id }}
+            aria-label={`Voir les pièces compatibles ${brand.name}`}
+            className="group flex aspect-[3/2] items-center justify-center rounded-2xl border border-slate-200 bg-white p-4 shadow-sm transition duration-300 hover:-translate-y-1 hover:border-signal/40 hover:shadow-soft focus:outline-none focus-visible:ring-2 focus-visible:ring-signal focus-visible:ring-offset-2"
           >
             {brand.logo ? (
               <img
@@ -30,7 +34,7 @@ export function BrandShowcase(): JSX.Element {
                 {brand.name}
               </span>
             )}
-          </div>
+          </Link>
         ))}
       </div>
     </section>

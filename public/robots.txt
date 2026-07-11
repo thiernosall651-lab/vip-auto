@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://vipauto.ma/sitemap.xml
+Sitemap: https://vipauto.sn/sitemap.xml

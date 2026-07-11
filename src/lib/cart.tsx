@@ -1,5 +1,6 @@
 import { createContext, useCallback, useContext, useEffect, useMemo, useState } from "react";
 import { contactInfo } from "../data/catalog";
+import { formatCurrency } from "./format";
 import type { CartItem, Product } from "../types/catalog";
 
 type CartContextValue = {
@@ -81,9 +82,18 @@ export function CartProvider({ children }: { children: React.ReactNode }): JSX.E
 
   const buildWhatsAppOrderUrl = useCallback(() => {
     const orderLines = items
-      .map((item) => `- ${item.product.name} x${item.quantity} (${item.product.price * item.quantity} MAD)`)
+      .map(
+        (item) =>
+          `- ${item.product.name} x${item.quantity} (${formatCurrency(
+            item.product.price * item.quantity,
+            item.product.currency,
+          )})`,
+      )
       .join("\n");
-    const message = `Bonjour, je veux commander:\n${orderLines}\nTotal: ${subtotal} MAD\nMerci de confirmer la compatibilité.`;
+    const message = `Bonjour, je veux commander:\n${orderLines}\nTotal: ${formatCurrency(
+      subtotal,
+      "XOF",
+    )}\nMerci de confirmer la compatibilité.`;
 
     return `https://wa.me/${contactInfo.whatsapp}?text=${encodeURIComponent(message)}`;
   }, [items, subtotal]);

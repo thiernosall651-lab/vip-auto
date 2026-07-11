@@ -13,12 +13,14 @@
 
 html {
   scroll-behavior: smooth;
+  /* Dark brand background paints first to avoid a white flash before content renders. */
+  background: #0a0b0d;
 }
 
 body {
   min-width: 320px;
   margin: 0;
-  background: #ffffff;
+  background: #0a0b0d;
 }
 
 button,

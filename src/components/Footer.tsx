@@ -8,7 +8,15 @@ export function Footer(): JSX.Element {
       <div className="mx-auto grid max-w-7xl gap-10 px-4 py-12 md:grid-cols-[1.2fr_0.8fr_0.8fr]">
         <div>
           <div className="flex items-center gap-3">
-            <img className="h-12 w-auto" src="/images/logo-vip.png" alt="Logo VIP AUTO" width="144" height="48" />
+            <img
+              className="h-12 w-auto"
+              src="/images/logo-vip.webp"
+              alt="Logo VIP AUTO"
+              width="240"
+              height="160"
+              loading="lazy"
+              decoding="async"
+            />
             <div>
               <p className="text-lg font-black uppercase">{contactInfo.companyName}</p>
               <p className="text-sm text-slate-400">Pièces automobiles • Entretien • Performance</p>
@@ -32,49 +40,50 @@ export function Footer(): JSX.Element {
         </div>
 
         <div>
-          <h2 className="text-sm font-black uppercase tracking-normal text-white">Liens rapides</h2>
-          <ul className="mt-5 grid gap-3 text-sm text-slate-300">
+          <h3 className="text-sm font-black uppercase tracking-normal text-white">Liens rapides</h3>
+          <ul className="mt-3 grid text-sm text-slate-300">
             <li>
-              <Link className="transition hover:text-white" to="/shop">
+              <Link className="inline-flex min-h-[44px] items-center transition hover:text-white" to="/shop">
                 Boutique
               </Link>
             </li>
             <li>
-              <Link className="transition hover:text-white" to="/about">
+              <Link className="inline-flex min-h-[44px] items-center transition hover:text-white" to="/about">
                 À propos
               </Link>
             </li>
             <li>
-              <Link className="transition hover:text-white" to="/contact">
+              <Link className="inline-flex min-h-[44px] items-center transition hover:text-white" to="/contact">
                 Contact
               </Link>
-            </li>
-            <li>
-              <a className="transition hover:text-white" href="/robots.txt">
-                Robots.txt
-              </a>
             </li>
           </ul>
         </div>
 
         <div>
-          <h2 className="text-sm font-black uppercase tracking-normal text-white">Contact</h2>
-          <ul className="mt-5 grid gap-4 text-sm text-slate-300">
-            <li className="flex gap-3">
-              <MapPin className="mt-0.5 h-4 w-4 flex-none text-signal" aria-hidden="true" />
-              <span>
+          <h3 className="text-sm font-black uppercase tracking-normal text-white">Contact</h3>
+          <ul className="mt-3 grid gap-1 text-sm text-slate-300">
+            <li className="flex items-center gap-3">
+              <MapPin className="h-4 w-4 flex-none text-signal" aria-hidden="true" />
+              <span className="py-2">
                 {contactInfo.address}, {contactInfo.city}, {contactInfo.country}
               </span>
             </li>
-            <li className="flex gap-3">
-              <Mail className="mt-0.5 h-4 w-4 flex-none text-signal" aria-hidden="true" />
-              <a className="transition hover:text-white" href={`mailto:${contactInfo.email}`}>
+            <li className="flex items-center gap-3">
+              <Mail className="h-4 w-4 flex-none text-signal" aria-hidden="true" />
+              <a
+                className="inline-flex min-h-[44px] items-center transition hover:text-white"
+                href={`mailto:${contactInfo.email}`}
+              >
                 {contactInfo.email}
               </a>
             </li>
-            <li className="flex gap-3">
-              <Phone className="mt-0.5 h-4 w-4 flex-none text-signal" aria-hidden="true" />
-              <a className="transition hover:text-white" href={`tel:${contactInfo.phone.replace(/\s/g, "")}`}>
+            <li className="flex items-center gap-3">
+              <Phone className="h-4 w-4 flex-none text-signal" aria-hidden="true" />
+              <a
+                className="inline-flex min-h-[44px] items-center transition hover:text-white"
+                href={`tel:${contactInfo.phone.replace(/\s/g, "")}`}
+              >
                 {contactInfo.phone}
               </a>
             </li>

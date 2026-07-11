@@ -11,7 +11,7 @@ export function ContactPage(): JSX.Element {
   useSeo({
     title: "Contact | VIP AUTO",
     description:
-      "Contactez VIP AUTO à Casablanca pour vérifier une référence, demander un devis ou commander une pièce auto avec livraison.",
+      "Contactez VIP AUTO à Dakar pour vérifier une référence, demander un devis ou commander une pièce auto avec livraison.",
     canonicalPath: "/contact",
   });
 
@@ -29,7 +29,7 @@ export function ContactPage(): JSX.Element {
           <p className="text-sm font-black uppercase tracking-normal text-signal">Contact</p>
           <h1 className="mt-2 text-4xl font-black leading-tight text-ink md:text-5xl">Vérifier une pièce avant commande.</h1>
           <p className="mt-4 max-w-2xl text-base leading-8 text-slate-600">
-            Le formulaire prépare un message WhatsApp clair avec le véhicule et la demande du client.
+            Le formulaire prépare un message WhatsApp clair avec votre véhicule et votre demande.
           </p>
         </div>
       </section>
@@ -71,20 +71,28 @@ export function ContactPage(): JSX.Element {
           </a>
         </div>
 
-        <form className="rounded border border-slate-200 bg-white p-6 shadow-sm" onSubmit={handleSubmit}>
+        <form className="rounded border border-slate-200 bg-white p-6 shadow-sm" onSubmit={handleSubmit} aria-label="Formulaire de contact">
           <div className="grid gap-5">
-            <label className="grid gap-2 text-sm font-bold text-ink">
+            <label className="grid gap-2 text-sm font-bold text-ink" htmlFor="contact-name">
               Nom complet
               <input
+                id="contact-name"
+                name="name"
+                autoComplete="name"
+                aria-required="true"
                 className="min-h-12 rounded border border-slate-300 px-4 text-sm outline-none transition focus:border-signal focus:ring-2 focus:ring-red-100"
                 value={name}
                 onChange={(event) => setName(event.target.value)}
                 required
               />
             </label>
-            <label className="grid gap-2 text-sm font-bold text-ink">
+            <label className="grid gap-2 text-sm font-bold text-ink" htmlFor="contact-vehicle">
               Véhicule
               <input
+                id="contact-vehicle"
+                name="vehicle"
+                autoComplete="off"
+                aria-required="true"
                 className="min-h-12 rounded border border-slate-300 px-4 text-sm outline-none transition focus:border-signal focus:ring-2 focus:ring-red-100"
                 value={vehicle}
                 onChange={(event) => setVehicle(event.target.value)}
@@ -92,9 +100,13 @@ export function ContactPage(): JSX.Element {
                 required
               />
             </label>
-            <label className="grid gap-2 text-sm font-bold text-ink">
+            <label className="grid gap-2 text-sm font-bold text-ink" htmlFor="contact-message">
               Demande
               <textarea
+                id="contact-message"
+                name="message"
+                autoComplete="off"
+                aria-required="true"
                 className="min-h-36 rounded border border-slate-300 px-4 py-3 text-sm outline-none transition focus:border-signal focus:ring-2 focus:ring-red-100"
                 value={message}
                 onChange={(event) => setMessage(event.target.value)}

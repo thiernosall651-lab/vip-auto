@@ -23,7 +23,7 @@ const whatsappHref = `https://wa.me/${contactInfo.whatsapp}`;
 
 const heroStats = [
   { value: "23+", label: "Familles de pièces" },
-  { value: "24h", label: "Livraison Casablanca" },
+  { value: "24h", label: "Livraison Dakar" },
   { value: "100%", label: "Compatibilité vérifiée" },
 ];
 
@@ -38,9 +38,9 @@ export function HomePage(): JSX.Element {
   const featuredProducts = products.filter((product) => product.isFeatured);
 
   useSeo({
-    title: "VIP AUTO | Pièces auto premium & entretien à Casablanca",
+    title: "VIP AUTO | Pièces auto premium & entretien à Dakar",
     description:
-      "VIP AUTO à Casablanca : pièces auto premium, huiles, freinage, batteries, éclairage et services mécaniques. Compatibilité vérifiée, paiement à la livraison et conseil WhatsApp.",
+      "VIP AUTO à Dakar : pièces auto premium, huiles, freinage, batteries, éclairage et services mécaniques. Compatibilité vérifiée, paiement à la livraison et conseil WhatsApp.",
     canonicalPath: "/",
   });
 
@@ -55,24 +55,25 @@ export function HomePage(): JSX.Element {
           <div className="absolute bottom-[-25%] left-[-10%] h-[360px] w-[360px] rounded-full bg-signal/10 blur-[130px]" />
         </div>
 
-        <div className="mx-auto grid max-w-7xl items-center gap-10 px-4 pb-24 pt-14 sm:px-6 sm:pb-28 sm:pt-16 lg:grid-cols-2 lg:items-stretch lg:gap-14 lg:px-8 lg:pb-32 lg:pt-24">
+        <div className="mx-auto grid max-w-7xl items-center gap-7 px-4 pb-16 pt-9 sm:gap-10 sm:px-6 sm:pb-28 sm:pt-16 lg:grid-cols-2 lg:items-stretch lg:gap-14 lg:px-8 lg:pb-32 lg:pt-24">
           {/* Left column — content */}
           <div className="flex animate-fade-up flex-col lg:justify-center">
             <img
               className="h-11 w-auto self-start drop-shadow-[0_8px_24px_rgba(0,0,0,0.55)] sm:h-14 lg:h-16"
-              src="/images/logo-vip.png"
+              src="/images/logo-vip.webp"
               alt="Logo VIP AUTO"
-              width="220"
-              height="80"
+              width="240"
+              height="160"
               loading="eager"
+              decoding="async"
             />
 
-            <span className="mt-6 inline-flex w-fit items-center gap-2 rounded-full border border-white/15 bg-white/5 px-3.5 py-1.5 text-[11px] font-black uppercase tracking-widest text-neutral-200 sm:text-xs">
+            <span className="mt-5 inline-flex w-fit items-center gap-2 rounded-full border border-white/15 bg-white/5 px-3.5 py-1.5 text-[11px] font-black uppercase tracking-widest text-neutral-200 sm:mt-6 sm:text-xs">
               <span className="h-2 w-2 rounded-full bg-signal" aria-hidden="true" />
-              Casablanca, Maroc · Livraison 24h
+              Dakar, Sénégal · Livraison 24h
             </span>
 
-            <h1 className="mt-5 text-[2rem] font-black leading-[1.08] tracking-tight sm:text-5xl xl:text-6xl">
+            <h1 className="mt-4 text-[2rem] font-black leading-[1.08] tracking-tight sm:mt-5 sm:text-5xl xl:text-6xl">
               L'excellence automobile, <span className="text-signal">pièce par pièce.</span>
             </h1>
 
@@ -82,7 +83,7 @@ export function HomePage(): JSX.Element {
             </p>
 
             {/* CTA buttons — full width on mobile, inline from sm */}
-            <div className="mt-7 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
+            <div className="mt-6 flex flex-col gap-3 sm:mt-7 sm:flex-row sm:flex-wrap">
               <Link
                 className="inline-flex min-h-12 w-full items-center justify-center gap-2 rounded-xl bg-signal px-6 py-3 text-sm font-black uppercase tracking-normal text-white shadow-[0_16px_40px_-12px_rgba(220,38,38,0.6)] transition hover:bg-red-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-neutral-950 sm:w-auto"
                 to="/shop"
@@ -107,7 +108,7 @@ export function HomePage(): JSX.Element {
             </div>
 
             {/* Trust badges */}
-            <ul className="mt-6 flex flex-wrap items-center gap-x-5 gap-y-2 text-xs font-semibold text-slate-300 sm:gap-x-6 sm:text-sm">
+            <ul className="mt-5 flex flex-wrap items-center gap-x-5 gap-y-2 text-xs font-semibold text-slate-300 sm:mt-6 sm:gap-x-6 sm:text-sm">
               {trustBadges.map((badge) => {
                 const Icon = badge.icon;
 
@@ -121,7 +122,7 @@ export function HomePage(): JSX.Element {
             </ul>
 
             {/* Statistics — below the buttons */}
-            <dl className="mt-7 grid grid-cols-3 gap-2.5 sm:max-w-lg sm:gap-4">
+            <dl className="mt-6 grid grid-cols-3 gap-2.5 sm:mt-7 sm:max-w-lg sm:gap-4">
               {heroStats.map((stat) => (
                 <div
                   key={stat.label}
@@ -142,10 +143,13 @@ export function HomePage(): JSX.Element {
               <img
                 className="h-full w-full object-cover"
                 src="/images/hero-workshop.webp"
+                srcSet="/images/hero-workshop-sm.webp 800w, /images/hero-workshop.webp 1600w"
+                sizes="(min-width: 1024px) 50vw, 100vw"
                 alt="Showroom automobile VIP AUTO avec véhicule premium sous éclairage d'atelier"
                 width="1600"
                 height="1200"
                 loading="eager"
+                decoding="async"
               />
               <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-neutral-950/60 via-transparent to-neutral-950/20" />
               <div className="pointer-events-none absolute inset-0 rounded-3xl ring-1 ring-inset ring-white/10" />
@@ -171,7 +175,7 @@ export function HomePage(): JSX.Element {
               </span>
               <div>
                 <p className="text-sm font-black leading-none">Livraison 24h</p>
-                <p className="mt-1 text-xs font-semibold text-steel">Casablanca &amp; grandes villes</p>
+                <p className="mt-1 text-xs font-semibold text-steel">Dakar &amp; grandes villes</p>
               </div>
             </div>
           </div>
@@ -190,14 +194,14 @@ export function HomePage(): JSX.Element {
             description="Une sélection courte avec prix TTC, stock et compatibilité véhicule pour passer commande sans hésiter."
           />
           <Link
-            className="inline-flex items-center gap-2 text-sm font-black uppercase tracking-normal text-signal"
+            className="inline-flex min-h-[44px] items-center gap-2 text-sm font-black uppercase tracking-normal text-signal"
             to="/shop"
           >
             Tous les produits
             <ArrowRight className="h-4 w-4" aria-hidden="true" />
           </Link>
         </div>
-        <div className="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="mt-8 grid gap-5 sm:grid-cols-2 md:grid-cols-3">
           {bestSellers.map((product) => (
             <ProductCard key={product.id} product={product} />
           ))}
@@ -209,10 +213,10 @@ export function HomePage(): JSX.Element {
         <div className="mx-auto max-w-7xl px-4 sm:px-6">
           <SectionHeader
             eyebrow="Univers"
-            title="Navigation claire pour les clients mobiles"
-            description="Les univers prioritaires accélèrent la décision et limitent les recherches inutiles."
+            title="Explorez nos univers produits"
+            description="Retrouvez rapidement la bonne catégorie de pièces et d'entretien pour votre véhicule."
           />
-          <div className="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5">
+          <div className="mt-8 grid gap-5 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-5">
             {categories.map((category) => (
               <article
                 key={category.id}
@@ -221,8 +225,11 @@ export function HomePage(): JSX.Element {
                 <img
                   className="aspect-[4/3] w-full object-cover"
                   src={category.image}
+                  srcSet={`${category.image.replace(/\.webp$/, "-sm.webp")} 450w, ${category.image} 900w`}
+                  sizes="(min-width: 1280px) 18vw, (min-width: 1024px) 30vw, (min-width: 640px) 45vw, 90vw"
                   alt={category.imageAlt}
                   loading="lazy"
+                  decoding="async"
                   width="500"
                   height="375"
                 />
@@ -230,7 +237,7 @@ export function HomePage(): JSX.Element {
                   <h3 className="text-lg font-black text-ink">{category.name}</h3>
                   <p className="mt-2 flex-1 text-sm leading-6 text-slate-600">{category.description}</p>
                   <Link
-                    className="mt-4 inline-flex items-center gap-2 text-sm font-black uppercase tracking-normal text-signal"
+                    className="mt-4 inline-flex min-h-[44px] items-center gap-2 text-sm font-black uppercase tracking-normal text-signal"
                     to="/shop"
                     search={{ category: category.id }}
                   >
@@ -252,7 +259,7 @@ export function HomePage(): JSX.Element {
         <SectionHeader
           eyebrow="Pourquoi VIP AUTO"
           title="Pourquoi choisir VIP AUTO ?"
-          description="Une boutique de pièces auto doit réduire le risque perçu : compatibilité, livraison, paiement et conseil professionnel."
+          description="Compatibilité vérifiée, livraison rapide, paiement à la livraison et conseil professionnel à chaque commande."
         />
         <div className="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
           {guarantees.map((guarantee, index) => {
@@ -283,7 +290,7 @@ export function HomePage(): JSX.Element {
               La confiance de nos clients au quotidien.
             </h2>
             <p className="mt-4 text-base leading-7 text-slate-300">
-              Les avis visibles aident à convertir les visiteurs qui commandent depuis mobile et découvrent VIP AUTO.
+              Particuliers, professionnels et garages nous font confiance pour leurs pièces et leur entretien.
             </p>
           </div>
           <div className="grid gap-4 sm:grid-cols-2 md:grid-cols-3">
@@ -309,11 +316,11 @@ export function HomePage(): JSX.Element {
           <div className="flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
             <SectionHeader
               eyebrow="Produits en vedette"
-              title="Catalogue extensible"
-              description="La structure permet d'ajouter références OEM, variantes, stocks et prix multi-devises."
+              title="Références premium à commander"
+              description="Une sélection de produits contrôlés, prêts à l'expédition avec compatibilité vérifiée."
             />
             <Link
-              className="inline-flex items-center gap-2 text-sm font-black uppercase tracking-normal text-signal"
+              className="inline-flex min-h-[44px] items-center gap-2 text-sm font-black uppercase tracking-normal text-signal"
               to="/shop"
             >
               Explorer
@@ -330,37 +337,6 @@ export function HomePage(): JSX.Element {
 
       {/* ===================== BRANDS ===================== */}
       <BrandShowcase />
-
-      {/* ===================== NEWSLETTER ===================== */}
-      <section className="bg-slate-50 px-4 py-14 sm:px-6 sm:py-16 lg:py-20">
-        <div className="mx-auto grid max-w-5xl gap-6 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm md:grid-cols-[1fr_auto] md:items-center md:p-8">
-          <div>
-            <p className="text-sm font-black uppercase tracking-normal text-signal">Newsletter</p>
-            <h2 className="mt-2 text-2xl font-black text-ink">Recevoir les arrivages et promotions VIP AUTO.</h2>
-            <p className="mt-2 text-sm leading-6 text-slate-600">
-              Un bloc prêt à connecter à Brevo, Mailchimp ou une automation maison.
-            </p>
-          </div>
-          <form className="grid gap-3 sm:grid-cols-[minmax(0,1fr)_auto]">
-            <label className="sr-only" htmlFor="newsletter-email">
-              Adresse email
-            </label>
-            <input
-              id="newsletter-email"
-              className="min-h-12 rounded-xl border border-slate-300 px-4 text-sm outline-none transition focus:border-signal focus:ring-2 focus:ring-red-100"
-              type="email"
-              placeholder="votre@email.com"
-              required
-            />
-            <button
-              className="inline-flex min-h-12 items-center justify-center rounded-xl bg-ink px-5 py-3 text-sm font-black uppercase tracking-normal text-white transition hover:bg-signal"
-              type="submit"
-            >
-              S'inscrire
-            </button>
-          </form>
-        </div>
-      </section>
     </main>
   );
 }

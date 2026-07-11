@@ -29,15 +29,19 @@ export function VehicleFinder(): JSX.Element {
   }
 
   return (
-    <section className="relative z-10 mx-auto -mt-16 max-w-6xl px-4 sm:-mt-20 sm:px-6 lg:-mt-24">
+    <section className="relative z-10 mx-auto -mt-14 max-w-6xl px-4 sm:-mt-20 sm:px-6 lg:-mt-24">
       <form
         className="rounded-2xl border border-slate-200/80 bg-white p-4 shadow-[0_24px_60px_-20px_rgba(2,6,23,0.45)] ring-1 ring-black/5 md:p-6"
         onSubmit={handleSubmit}
+        aria-label="Rechercher des pièces par véhicule"
       >
         <div className="grid gap-4 md:grid-cols-[1fr_1fr_auto] md:items-end">
-          <label className="grid gap-2 text-sm font-bold text-ink">
+          <label className="grid gap-2 text-sm font-bold text-ink" htmlFor="finder-brand">
             Marque
             <select
+              id="finder-brand"
+              name="brand"
+              autoComplete="off"
               className="min-h-12 rounded border border-slate-300 bg-white px-3 text-sm font-semibold text-slate-700 outline-none transition focus:border-signal focus:ring-2 focus:ring-red-100"
               value={selectedBrand}
               onChange={(event) => setSelectedBrand(event.target.value)}
@@ -51,9 +55,12 @@ export function VehicleFinder(): JSX.Element {
             </select>
           </label>
 
-          <label className="grid gap-2 text-sm font-bold text-ink">
+          <label className="grid gap-2 text-sm font-bold text-ink" htmlFor="finder-year">
             Année
             <select
+              id="finder-year"
+              name="year"
+              autoComplete="off"
               className="min-h-12 rounded border border-slate-300 bg-white px-3 text-sm font-semibold text-slate-700 outline-none transition focus:border-signal focus:ring-2 focus:ring-red-100"
               value={selectedYear}
               onChange={(event) => setSelectedYear(event.target.value)}
@@ -76,13 +83,15 @@ export function VehicleFinder(): JSX.Element {
           </button>
         </div>
 
-        {hasSearched ? (
-          <div className="mt-4 rounded bg-slate-50 px-4 py-3 text-sm font-semibold text-slate-700">
-            {matchingProducts.length > 0
-              ? `${matchingProducts.length} produit(s) compatible(s) trouvé(s).`
-              : "Aucun produit statique trouvé. Un conseiller peut vérifier la référence sur WhatsApp."}
-          </div>
-        ) : null}
+        <div className="mt-4" role="status" aria-live="polite">
+          {hasSearched ? (
+            <div className="rounded bg-slate-50 px-4 py-3 text-sm font-semibold text-slate-700">
+              {matchingProducts.length > 0
+                ? `${matchingProducts.length} produit(s) compatible(s) trouvé(s).`
+                : "Aucun produit trouvé pour cette recherche. Un conseiller peut vérifier la référence sur WhatsApp."}
+            </div>
+          ) : null}
+        </div>
       </form>
     </section>
   );

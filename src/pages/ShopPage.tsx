@@ -19,11 +19,15 @@ export function ShopPage(): JSX.Element {
   const [category, setCategory] = useState<CategoryFilter>(() =>
     isCategoryFilter(search.category) ? search.category : "all",
   );
-  const [brand, setBrand] = useState("all");
+  const [brand, setBrand] = useState(() => (search.brand ? search.brand.toLowerCase() : "all"));
 
   useEffect(() => {
     setCategory(isCategoryFilter(search.category) ? search.category : "all");
   }, [search.category]);
+
+  useEffect(() => {
+    setBrand(search.brand ? search.brand.toLowerCase() : "all");
+  }, [search.brand]);
 
   useSeo({
     title: "Boutique pièces auto | VIP AUTO",
@@ -54,9 +58,10 @@ export function ShopPage(): JSX.Element {
       <section className="bg-slate-50 px-4 py-14">
         <div className="mx-auto max-w-7xl">
           <SectionHeader
+            as="h1"
             eyebrow="Boutique"
             title="Catalogue de pièces auto"
-            description="Une base de catalogue claire, prête pour les stocks, références OEM et prix par marché."
+            description="Filtrez par catégorie, marque compatible et mot-clé pour trouver la pièce adaptée à votre véhicule."
           />
 
           <div className="mt-8 grid gap-3 rounded border border-slate-200 bg-white p-4 shadow-sm md:grid-cols-[1fr_220px_220px]">
@@ -66,6 +71,8 @@ export function ShopPage(): JSX.Element {
               <input
                 className="min-h-12 w-full rounded border border-slate-300 pl-10 pr-4 text-sm outline-none transition focus:border-signal focus:ring-2 focus:ring-red-100"
                 type="search"
+                name="q"
+                autoComplete="off"
                 value={query}
                 onChange={(event) => setQuery(event.target.value)}
                 placeholder="Huile, batterie, Mercedes..."
@@ -125,7 +132,7 @@ export function ShopPage(): JSX.Element {
           <div className="rounded border border-dashed border-slate-300 bg-slate-50 p-8 text-center">
             <h2 className="text-xl font-black text-ink">Aucun produit trouvé</h2>
             <p className="mt-2 text-sm leading-6 text-slate-600">
-              Essaie une autre recherche ou demande une vérification de référence par WhatsApp.
+              Essayez une autre recherche ou demandez une vérification de référence par WhatsApp.
             </p>
           </div>
         )}

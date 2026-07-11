@@ -1,6 +1,6 @@
 import { Link, useParams } from "@tanstack/react-router";
 import { ArrowLeft, CheckCircle2, MessageCircle, ShoppingCart } from "lucide-react";
-import { products } from "../data/catalog";
+import { contactInfo, products } from "../data/catalog";
 import { useCart } from "../lib/cart";
 import { calculateDiscount, formatCurrency } from "../lib/format";
 import { useSeo } from "../lib/useSeo";
@@ -11,12 +11,37 @@ export function ProductPage(): JSX.Element {
   const { addItem } = useCart();
   const product = products.find((currentProduct) => currentProduct.slug === productSlug);
 
+  const siteUrl = "https://vipauto.sn";
+  const productJsonLd = product
+    ? {
+        "@context": "https://schema.org",
+        "@type": "Product",
+        name: product.name,
+        image: `${siteUrl}${product.image}`,
+        description: product.description,
+        sku: product.id,
+        brand: { "@type": "Brand", name: product.brand },
+        offers: {
+          "@type": "Offer",
+          priceCurrency: product.currency,
+          price: product.price,
+          availability:
+            product.stock > 0 ? "https://schema.org/InStock" : "https://schema.org/PreOrder",
+          url: `${siteUrl}/products/${product.slug}`,
+          seller: { "@type": "Organization", name: "VIP AUTO" },
+        },
+      }
+    : undefined;
+
   useSeo({
     title: product ? `${product.name} | VIP AUTO` : "Produit introuvable | VIP AUTO",
     description: product
       ? product.description
       : "Le produit demandé n'existe pas ou n'est plus disponible dans le catalogue.",
     canonicalPath: product ? `/products/${product.slug}` : "/shop",
+    image: product ? product.image : undefined,
+    type: product ? "product" : "website",
+    jsonLd: productJsonLd,
   });
 
   if (!product) {
@@ -55,10 +80,13 @@ export function ProductPage(): JSX.Element {
           <img
             className="aspect-[4/3] w-full object-cover"
             src={product.image}
+            srcSet={`${product.image.replace(/\.webp$/, "-sm.webp")} 450w, ${product.image} 900w`}
+            sizes="(min-width: 1024px) 50vw, 100vw"
             alt={product.imageAlt}
             width="900"
             height="675"
             loading="eager"
+            decoding="async"
           />
         </div>
 
@@ -103,7 +131,7 @@ export function ProductPage(): JSX.Element {
             </button>
             <a
               className="inline-flex min-h-12 items-center justify-center gap-2 rounded bg-emerald-600 px-6 py-3 text-sm font-black uppercase tracking-normal text-white transition hover:bg-emerald-700"
-              href={`https://wa.me/212672479776?text=${encodeURIComponent(
+              href={`https://wa.me/${contactInfo.whatsapp}?text=${encodeURIComponent(
                 `Bonjour, je veux confirmer la compatibilité du produit: ${product.name}`,
               )}`}
             >

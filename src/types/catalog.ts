@@ -6,7 +6,7 @@ export type ProductCategory =
   | "mercedes"
   | "accessories";
 
-export type CurrencyCode = "MAD" | "XOF" | "EUR";
+export type CurrencyCode = "XOF" | "EUR";
 
 export type Product = {
   id: string;

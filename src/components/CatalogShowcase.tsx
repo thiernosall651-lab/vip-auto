@@ -65,6 +65,7 @@ export function CatalogShowcase(): JSX.Element {
       />
       <div className="relative mx-auto max-w-7xl px-4 sm:px-6">
         <SectionHeader
+          tone="dark"
           eyebrow="Catalogue complet"
           title="Tout pour votre véhicule, au même endroit"
           description="Pièces d'origine, entretien premium et services mécaniques classés par famille pour trouver la bonne référence en un instant."
@@ -78,7 +79,7 @@ export function CatalogShowcase(): JSX.Element {
                 <h3 className="text-xl font-black tracking-tight text-white sm:text-2xl">{family.title}</h3>
               </div>
 
-              <div className="mt-5 grid grid-cols-2 gap-3 sm:gap-4 lg:grid-cols-3 xl:grid-cols-4">
+              <div className="mt-5 grid grid-cols-2 gap-3 sm:gap-4 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-4">
                 {family.items.map((item) => {
                   const Icon = iconByKey[item.icon] ?? Wrench;
 

@@ -232,12 +232,56 @@ function renderTile(asset) {
 
 await mkdir(outputDir, { recursive: true });
 
+// Each visual is emitted at full width plus a half-width "-sm" variant for srcset.
 await Promise.all(
   assets.map(async (asset) => {
     const svg = asset.kind === "hero" ? renderHero(asset) : renderTile(asset);
+    const rendered = Buffer.from(svg);
 
-    await sharp(Buffer.from(svg)).webp({ quality: 86 }).toFile(path.join(outputDir, asset.fileName));
+    await sharp(rendered).webp({ quality: 86 }).toFile(path.join(outputDir, asset.fileName));
+    await sharp(rendered)
+      .resize(Math.round(asset.width / 2))
+      .webp({ quality: 84 })
+      .toFile(path.join(outputDir, asset.fileName.replace(/\.webp$/, "-sm.webp")));
   }),
 );
 
-console.log(`Generated ${assets.length} premium assets.`);
+// Brand assets derived from the source logo: a lightweight webp for on-page use
+// and a 1200x630 social share cover. Requires public/images/logo-vip.png to exist.
+const logoPath = path.join(outputDir, "logo-vip.png");
+const logoBuffer = await sharp(logoPath).toBuffer();
+
+await sharp(logoBuffer).resize(480, 320, { fit: "inside" }).webp({ quality: 88 }).toFile(path.join(outputDir, "logo-vip.webp"));
+
+const ogWidth = 1200;
+const ogHeight = 630;
+const ogBackground = Buffer.from(`
+  <svg xmlns="http://www.w3.org/2000/svg" width="${ogWidth}" height="${ogHeight}">
+    <defs>
+      <radialGradient id="s" cx="50%" cy="34%" r="80%">
+        <stop offset="0" stop-color="#1b1f27"/><stop offset="55%" stop-color="#0b0d12"/><stop offset="100%" stop-color="#050608"/>
+      </radialGradient>
+      <radialGradient id="r" cx="78%" cy="24%" r="55%">
+        <stop offset="0" stop-color="#dc2626" stop-opacity="0.42"/><stop offset="100%" stop-color="#dc2626" stop-opacity="0"/>
+      </radialGradient>
+    </defs>
+    <rect width="${ogWidth}" height="${ogHeight}" fill="url(#s)"/>
+    <rect width="${ogWidth}" height="${ogHeight}" fill="url(#r)"/>
+    <rect y="${ogHeight * 0.72}" width="${ogWidth}" height="2" fill="#ffffff" opacity="0.06"/>
+  </svg>
+`);
+const ogLogo = await sharp(logoBuffer).resize(560, null, { fit: "inside" }).png().toBuffer();
+const ogLogoMeta = await sharp(ogLogo).metadata();
+
+await sharp(await sharp(ogBackground).png().toBuffer())
+  .composite([
+    {
+      input: ogLogo,
+      top: Math.round((ogHeight - (ogLogoMeta.height ?? 0)) / 2),
+      left: Math.round((ogWidth - (ogLogoMeta.width ?? 0)) / 2),
+    },
+  ])
+  .jpeg({ quality: 82 })
+  .toFile(path.join(outputDir, "og-cover.jpg"));
+
+console.log(`Generated ${assets.length} premium assets (full + -sm), logo-vip.webp and og-cover.jpg.`);

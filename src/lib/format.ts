@@ -1,13 +1,12 @@
 import type { CurrencyCode } from "../types/catalog";
 
 export function formatCurrency(amount: number, currency: CurrencyCode): string {
-  const localeByCurrency: Record<CurrencyCode, string> = {
-    MAD: "fr-MA",
-    XOF: "fr-SN",
-    EUR: "fr-FR",
-  };
+  // XOF (West African CFA franc) is displayed as "FCFA" with space-grouped thousands.
+  if (currency === "XOF") {
+    return `${new Intl.NumberFormat("fr-SN", { maximumFractionDigits: 0 }).format(amount)} FCFA`;
+  }
 
-  return new Intl.NumberFormat(localeByCurrency[currency], {
+  return new Intl.NumberFormat("fr-FR", {
     style: "currency",
     currency,
     maximumFractionDigits: 0,
