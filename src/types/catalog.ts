@@ -1,10 +1,8 @@
 export type ProductCategory =
   | "engine-oil"
-  | "battery"
-  | "braking"
-  | "maintenance"
-  | "mercedes"
-  | "accessories";
+  | "transmission"
+  | "filtration"
+  | "ignition";
 
 export type CurrencyCode = "MAD" | "XOF" | "EUR";
 
@@ -20,6 +18,7 @@ export type Product = {
   compareAtPrice?: number;
   currency: CurrencyCode;
   image: string;
+  images?: string[];
   imageAlt: string;
   badge?: string;
   description: string;
@@ -27,6 +26,14 @@ export type Product = {
   stock: number;
   isFeatured: boolean;
   isBestSeller: boolean;
+  isActive?: boolean;
+  // Optional AI-assisted marketing / SEO fields (additive; safe to leave empty).
+  seoTitle?: string;
+  seoDescription?: string;
+  longDescription?: string;
+  benefits?: string[];
+  keywords?: string[];
+  tags?: string[];
 };
 
 export type Category = {
@@ -40,6 +47,7 @@ export type Category = {
 export type VehicleBrand = {
   id: string;
   name: string;
+  logo?: string;
 };
 
 export type Review = {
@@ -55,6 +63,45 @@ export type Guarantee = {
   description: string;
 };
 
+export type Service = {
+  id: string;
+  name: string;
+  description: string;
+  details: string[];
+  image?: string;
+};
+
+export type OilProduct = {
+  id: string;
+  brand: string;
+  name: string;
+  grade: string;
+  description: string;
+  image?: string;
+  badge?: string;
+};
+
+export type HeroContent = {
+  eyebrow: string;
+  title: string;
+  subtitle: string;
+  primaryCtaLabel: string;
+  secondaryCtaLabel: string;
+  image: string;
+};
+
+export type BrandItem = VehicleBrand & {
+  logo?: string;
+};
+
+// Showcase-only oil brand (no product/price): official container photo + logo.
+export type OilBrandShowcase = {
+  id: string;
+  name: string;
+  logo: string;
+  image: string;
+};
+
 export type CartItem = {
   product: Product;
   quantity: number;
@@ -62,8 +109,8 @@ export type CartItem = {
 
 export type ContactInfo = {
   companyName: string;
-  email: string;
   phone: string;
+  phoneSecondary: string;
   whatsapp: string;
   address: string;
   city: string;

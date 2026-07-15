@@ -14,7 +14,7 @@ export function ProductCard({ product }: ProductCardProps): JSX.Element {
 
   return (
     <article className="group flex h-full flex-col overflow-hidden rounded border border-slate-200 bg-white shadow-sm transition hover:-translate-y-1 hover:shadow-soft">
-      <Link to="/products/$productSlug" params={{ productSlug: product.slug }} className="relative block bg-slate-100">
+      <Link to="/products/$productSlug" params={{ productSlug: product.slug }} className="relative block bg-white">
         {discount ? (
           <span className="absolute left-3 top-3 z-10 rounded bg-signal px-2.5 py-1 text-xs font-black text-white">
             -{discount}%
@@ -26,7 +26,7 @@ export function ProductCard({ product }: ProductCardProps): JSX.Element {
           </span>
         ) : null}
         <img
-          className="aspect-[4/3] w-full object-cover transition duration-300 group-hover:scale-105"
+          className="aspect-[4/3] w-full bg-white object-contain p-4 transition duration-300 group-hover:scale-105"
           src={product.image}
           alt={product.imageAlt}
           loading="lazy"
@@ -36,9 +36,20 @@ export function ProductCard({ product }: ProductCardProps): JSX.Element {
       </Link>
 
       <div className="flex flex-1 flex-col p-4">
-        <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-normal text-slate-500">
-          <CheckCircle2 className="h-4 w-4 text-emerald-600" aria-hidden="true" />
-          {product.stock > 0 ? "En stock" : "Sur commande"}
+        <div
+          className={`flex items-center gap-2 text-xs font-bold uppercase tracking-normal ${
+            product.stock > 0 && product.stock <= 10 ? "text-amber-600" : "text-slate-500"
+          }`}
+        >
+          <CheckCircle2
+            className={`h-4 w-4 ${product.stock > 0 && product.stock <= 10 ? "text-amber-600" : "text-emerald-600"}`}
+            aria-hidden="true"
+          />
+          {product.stock > 0
+            ? product.stock <= 10
+              ? `Plus que ${product.stock} en stock`
+              : "En stock"
+            : "Sur commande"}
         </div>
         <h2 className="mt-3 min-h-14 text-base font-black leading-snug text-ink">
           <Link className="transition hover:text-signal" to="/products/$productSlug" params={{ productSlug: product.slug }}>
@@ -58,7 +69,7 @@ export function ProductCard({ product }: ProductCardProps): JSX.Element {
         </div>
 
         <button
-          className="mt-5 inline-flex min-h-11 items-center justify-center gap-2 rounded bg-ink px-4 py-3 text-sm font-bold text-white transition hover:bg-signal focus:outline-none focus:ring-2 focus:ring-signal focus:ring-offset-2"
+          className="mt-5 inline-flex min-h-11 items-center justify-center gap-2 rounded bg-ink px-4 py-3 text-sm font-bold text-white transition hover:bg-signal focus:outline-none focus:ring-2 focus:ring-signal focus:ring-offset-2 active:scale-[0.98]"
           type="button"
           onClick={() => addItem(product)}
         >

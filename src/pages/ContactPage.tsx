@@ -1,25 +1,28 @@
 import { FormEvent, useState } from "react";
-import { Mail, MapPin, MessageCircle, Phone } from "lucide-react";
+import { CalendarCheck, MapPin, MessageCircle, Phone } from "lucide-react";
 import { contactInfo } from "../data/catalog";
 import { useSeo } from "../lib/useSeo";
+import { useAppointment } from "../lib/appointment";
+import { whatsappUrl } from "../lib/whatsapp";
 
 export function ContactPage(): JSX.Element {
+  const { openAppointment } = useAppointment();
   const [name, setName] = useState("");
   const [vehicle, setVehicle] = useState("");
   const [message, setMessage] = useState("");
 
   useSeo({
-    title: "Contact | Atlas Auto Parts",
+    title: "Contact & rendez-vous | VIP AUTO Dakar",
     description:
-      "Contactez Atlas Auto Parts pour vérifier une référence, demander un devis ou commander une pièce auto avec livraison.",
+      "Contactez VIP AUTO à Dakar pour prendre rendez-vous, demander un devis d'entretien ou un conseil. Réponse rapide sur WhatsApp.",
     canonicalPath: "/contact",
   });
 
   function handleSubmit(event: FormEvent<HTMLFormElement>): void {
     event.preventDefault();
 
-    const whatsappMessage = `Bonjour, je m'appelle ${name}. Véhicule: ${vehicle}. Demande: ${message}`;
-    window.location.href = `https://wa.me/${contactInfo.whatsapp}?text=${encodeURIComponent(whatsappMessage)}`;
+    const whatsappMessage = `Bonjour VIP AUTO, je souhaite prendre rendez-vous.\nNom : ${name}\nVéhicule : ${vehicle}\nBesoin : ${message}`;
+    window.open(whatsappUrl(whatsappMessage), "_blank", "noopener,noreferrer");
   }
 
   return (
@@ -27,9 +30,11 @@ export function ContactPage(): JSX.Element {
       <section className="bg-slate-50 px-4 py-14">
         <div className="mx-auto max-w-7xl">
           <p className="text-sm font-black uppercase tracking-normal text-signal">Contact</p>
-          <h1 className="mt-2 text-4xl font-black leading-tight text-ink md:text-5xl">Vérifier une pièce avant commande.</h1>
+          <h1 className="mt-2 text-4xl font-black leading-tight text-ink md:text-5xl">
+            Prendre rendez-vous ou nous contacter.
+          </h1>
           <p className="mt-4 max-w-2xl text-base leading-8 text-slate-600">
-            Le formulaire prépare un message WhatsApp clair avec le véhicule et la demande du client.
+            Décrivez votre besoin : nous vous confirmons le créneau et le devis sur WhatsApp.
           </p>
         </div>
       </section>
@@ -51,16 +56,23 @@ export function ContactPage(): JSX.Element {
               </a>
             </li>
             <li className="flex gap-3">
-              <Mail className="mt-0.5 h-5 w-5 flex-none text-signal" aria-hidden="true" />
-              <a className="font-bold transition hover:text-signal" href={`mailto:${contactInfo.email}`}>
-                {contactInfo.email}
+              <Phone className="mt-0.5 h-5 w-5 flex-none text-signal" aria-hidden="true" />
+              <a
+                className="font-bold transition hover:text-signal"
+                href={`tel:${contactInfo.phoneSecondary.replace(/\s/g, "")}`}
+              >
+                {contactInfo.phoneSecondary}
               </a>
             </li>
             <li className="flex gap-3">
               <MessageCircle className="mt-0.5 h-5 w-5 flex-none text-signal" aria-hidden="true" />
-              <a className="font-bold transition hover:text-signal" href={`https://wa.me/${contactInfo.whatsapp}`}>
-                WhatsApp commande
-              </a>
+              <button
+                type="button"
+                className="text-left font-bold transition hover:text-signal"
+                onClick={() => openAppointment()}
+              >
+                Prendre rendez-vous sur WhatsApp
+              </button>
             </li>
           </ul>
           <a
@@ -93,22 +105,22 @@ export function ContactPage(): JSX.Element {
               />
             </label>
             <label className="grid gap-2 text-sm font-bold text-ink">
-              Demande
+              Décrivez votre besoin
               <textarea
                 className="min-h-36 rounded border border-slate-300 px-4 py-3 text-sm outline-none transition focus:border-signal focus:ring-2 focus:ring-red-100"
                 value={message}
                 onChange={(event) => setMessage(event.target.value)}
-                placeholder="Référence, pièce recherchée, ville de livraison..."
+                placeholder="Service souhaité, symptômes, kilométrage, ville..."
                 required
               />
             </label>
           </div>
           <button
-            className="mt-6 inline-flex min-h-12 w-full items-center justify-center gap-2 rounded bg-emerald-600 px-5 py-3 text-sm font-black uppercase tracking-normal text-white transition hover:bg-emerald-700"
+            className="mt-6 inline-flex min-h-12 w-full items-center justify-center gap-2 rounded bg-emerald-600 px-5 py-3 text-sm font-black uppercase tracking-normal text-white transition hover:bg-emerald-700 active:scale-[0.98]"
             type="submit"
           >
-            <MessageCircle className="h-4 w-4" aria-hidden="true" />
-            Envoyer sur WhatsApp
+            <CalendarCheck className="h-4 w-4" aria-hidden="true" />
+            Prendre rendez-vous
           </button>
         </form>
       </section>

@@ -1,11 +1,21 @@
-import { CheckCircle2, ShieldCheck, Truck, Users } from "lucide-react";
+import { CalendarCheck, Car, ClipboardCheck, Wrench } from "lucide-react";
+import { useAppointment } from "../lib/appointment";
 import { useSeo } from "../lib/useSeo";
 
+const values = [
+  { icon: CalendarCheck, title: "Depuis 2020", text: "Un atelier de confiance installé à Dakar depuis plus de quatre ans." },
+  { icon: Wrench, title: "Mécaniciens qualifiés", text: "Une équipe expérimentée pour l'entretien de toutes les marques." },
+  { icon: ClipboardCheck, title: "Devis transparent", text: "Un prix clair et validé avec vous avant toute intervention." },
+  { icon: Car, title: "Toutes marques", text: "Nous entretenons les véhicules essence et diesel, toutes marques confondues." },
+];
+
 export function AboutPage(): JSX.Element {
+  const { openAppointment } = useAppointment();
+
   useSeo({
-    title: "À propos | Atlas Auto Parts",
+    title: "À propos | VIP AUTO Dakar",
     description:
-      "Découvrez le positionnement d'Atlas Auto Parts : pièces contrôlées, conseil humain et expérience e-commerce mobile-first.",
+      "VIP AUTO, centre d'entretien automobile fondé par Malik à Dakar en 2020 : mécaniciens qualifiés, devis transparent et travail soigné.",
     canonicalPath: "/about",
   });
 
@@ -14,10 +24,12 @@ export function AboutPage(): JSX.Element {
       <section className="bg-ink px-4 py-16 text-white">
         <div className="mx-auto max-w-5xl">
           <p className="text-sm font-black uppercase tracking-normal text-amber-300">À propos</p>
-          <h1 className="mt-3 text-4xl font-black leading-tight md:text-6xl">Une boutique auto pensée pour la confiance.</h1>
+          <h1 className="mt-3 text-4xl font-black leading-tight md:text-6xl">
+            Le garage de confiance des automobilistes dakarois.
+          </h1>
           <p className="mt-5 max-w-3xl text-lg leading-8 text-slate-300">
-            Le projet reprend les fondamentaux d’une boutique de pièces auto performante : catalogue clair, preuve sociale,
-            recherche véhicule et commande simple depuis mobile.
+            Fondé par Malik en 2020 à Dakar, VIP AUTO est un centre d'entretien automobile de proximité. Notre équipe
+            prend soin de votre véhicule avec sérieux, transparence et le sens du détail.
           </p>
         </div>
       </section>
@@ -25,25 +37,33 @@ export function AboutPage(): JSX.Element {
       <section className="mx-auto grid max-w-7xl gap-8 px-4 py-16 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
         <img
           className="rounded border border-slate-200 object-cover shadow-sm"
-          src="/images/about-counter.webp"
-          alt="Comptoir de boutique automobile avec pièces préparées pour livraison"
+          src="/images/mali-auto.webp"
+          alt="Mécanicien VIP AUTO réalisant une vidange d'huile moteur dans l'atelier de Dakar"
           width="900"
           height="650"
           loading="lazy"
         />
         <div>
-          <h2 className="text-3xl font-black leading-tight text-ink">Objectif business</h2>
+          <h2 className="text-3xl font-black leading-tight text-ink">Notre histoire</h2>
           <p className="mt-4 text-base leading-8 text-slate-600">
-            Transformer une présence locale en canal de vente moderne, capable de recevoir des demandes, rassurer les clients
-            et préparer les commandes avec moins d’erreurs de compatibilité.
+            VIP AUTO est né de la volonté de Malik d'offrir aux Dakarois un entretien automobile fiable et honnête.
+            Depuis 2020, notre atelier de Liberté 6, à Dakar, accompagne particuliers et professionnels pour la
+            vidange, le freinage, les filtres, le diagnostic et les petites réparations mécaniques.
           </p>
+          <p className="mt-4 text-base leading-8 text-slate-600">
+            Notre mission est simple : garder votre voiture en bon état, avec un devis clair avant chaque intervention
+            et des pièces de qualité. Pas de mauvaise surprise, juste un travail bien fait.
+          </p>
+          <button
+            type="button"
+            className="mt-6 inline-flex min-h-12 items-center justify-center gap-2 rounded bg-signal px-6 py-3 text-sm font-black uppercase tracking-normal text-white transition hover:bg-red-700 active:scale-[0.98]"
+            onClick={() => openAppointment()}
+          >
+            <CalendarCheck className="h-4 w-4" aria-hidden="true" />
+            Prendre rendez-vous
+          </button>
           <div className="mt-8 grid gap-4 sm:grid-cols-2">
-            {[
-              { icon: ShieldCheck, title: "Confiance", text: "Garanties, avis, stock et conditions visibles." },
-              { icon: Truck, title: "Livraison", text: "Promesse claire selon ville et disponibilité." },
-              { icon: Users, title: "Conseil", text: "Support humain avant paiement." },
-              { icon: CheckCircle2, title: "Conversion", text: "CTA WhatsApp, panier court et prix TTC." },
-            ].map((item) => {
+            {values.map((item) => {
               const Icon = item.icon;
 
               return (

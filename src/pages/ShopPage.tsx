@@ -1,7 +1,8 @@
 import { useSearch } from "@tanstack/react-router";
 import { Search } from "lucide-react";
 import { useEffect, useMemo, useState } from "react";
-import { categories, products, vehicleBrands } from "../data/catalog";
+import { categories } from "../data/catalog";
+import { useContent } from "../lib/content/store";
 import { useSeo } from "../lib/useSeo";
 import { ProductCard } from "../components/ProductCard";
 import { SectionHeader } from "../components/SectionHeader";
@@ -14,28 +15,30 @@ function isCategoryFilter(value: string | undefined): value is ProductCategory {
 }
 
 export function ShopPage(): JSX.Element {
+  const { activeProducts, content } = useContent();
   const search = useSearch({ from: "/shop" });
   const [query, setQuery] = useState("");
   const [category, setCategory] = useState<CategoryFilter>(() =>
     isCategoryFilter(search.category) ? search.category : "all",
   );
   const [brand, setBrand] = useState("all");
+  const [sortBy, setSortBy] = useState<"featured" | "price-asc" | "price-desc">("featured");
 
   useEffect(() => {
     setCategory(isCategoryFilter(search.category) ? search.category : "all");
   }, [search.category]);
 
   useSeo({
-    title: "Boutique pièces auto | Atlas Auto Parts",
+    title: "Boutique huiles & pièces auto à Dakar | VIP AUTO",
     description:
-      "Filtrez les pièces auto par catégorie, marque compatible et recherche texte. Commande rapide avec paiement à la livraison.",
+      "Huiles moteur Castrol, Valvoline, Shell Helix et TotalEnergies, filtres, bougies et pièces auto à Dakar, en complément de nos services d'entretien. Installation possible à l'atelier.",
     canonicalPath: "/shop",
   });
 
   const filteredProducts = useMemo(() => {
     const normalizedQuery = query.trim().toLowerCase();
 
-    return products.filter((product) => {
+    const matches = activeProducts.filter((product) => {
       const matchesQuery =
         normalizedQuery.length === 0 ||
         product.name.toLowerCase().includes(normalizedQuery) ||
@@ -47,16 +50,27 @@ export function ShopPage(): JSX.Element {
 
       return matchesQuery && matchesCategory && matchesBrand;
     });
-  }, [brand, category, query]);
+
+    if (sortBy === "price-asc") {
+      return [...matches].sort((a, b) => a.price - b.price);
+    }
+
+    if (sortBy === "price-desc") {
+      return [...matches].sort((a, b) => b.price - a.price);
+    }
+
+    return matches;
+  }, [activeProducts, brand, category, query, sortBy]);
 
   return (
     <main>
       <section className="bg-slate-50 px-4 py-14">
         <div className="mx-auto max-w-7xl">
           <SectionHeader
+            as="h1"
             eyebrow="Boutique"
-            title="Catalogue de pièces auto"
-            description="Une base de catalogue claire, prête pour les stocks, références OEM et prix par marché."
+            title="Huiles, filtres et pièces de qualité"
+            description="En complément de nos services d'entretien, retrouvez des huiles moteur, filtres et pièces sélectionnés pour leur fiabilité. Besoin d'une installation ? Prenez rendez-vous à l'atelier."
           />
 
           <div className="mt-8 grid gap-3 rounded border border-slate-200 bg-white p-4 shadow-sm md:grid-cols-[1fr_220px_220px]">
@@ -68,7 +82,7 @@ export function ShopPage(): JSX.Element {
                 type="search"
                 value={query}
                 onChange={(event) => setQuery(event.target.value)}
-                placeholder="Huile, batterie, Mercedes..."
+                placeholder="Huile, transmission, bougie..."
               />
             </label>
 
@@ -99,7 +113,7 @@ export function ShopPage(): JSX.Element {
               onChange={(event) => setBrand(event.target.value)}
             >
               <option value="all">Toutes marques</option>
-              {vehicleBrands.map((vehicleBrand) => (
+              {content.brands.map((vehicleBrand) => (
                 <option key={vehicleBrand.id} value={vehicleBrand.name.toLowerCase()}>
                   {vehicleBrand.name}
                 </option>
@@ -110,9 +124,20 @@ export function ShopPage(): JSX.Element {
       </section>
 
       <section className="mx-auto max-w-7xl px-4 py-12">
-        <div className="mb-6 flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
+        <div className="mb-6 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
           <p className="text-sm font-bold text-slate-600">{filteredProducts.length} produit(s) affiché(s)</p>
-          <p className="text-sm text-slate-500">Prix TTC · paiement à la livraison disponible</p>
+          <label className="flex items-center gap-2 text-sm text-slate-500">
+            <span className="font-semibold">Trier par</span>
+            <select
+              className="min-h-10 rounded border border-slate-300 bg-white px-3 text-sm font-semibold text-slate-700 outline-none transition focus:border-signal focus:ring-2 focus:ring-red-100"
+              value={sortBy}
+              onChange={(event) => setSortBy(event.target.value as "featured" | "price-asc" | "price-desc")}
+            >
+              <option value="featured">Pertinence</option>
+              <option value="price-asc">Prix croissant</option>
+              <option value="price-desc">Prix décroissant</option>
+            </select>
+          </label>
         </div>
 
         {filteredProducts.length > 0 ? (

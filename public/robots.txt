@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://atlas-auto-parts.example/sitemap.xml
+Sitemap: https://www.vipauto.sn/sitemap.xml

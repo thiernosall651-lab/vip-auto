@@ -1,19 +1,75 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://atlas-auto-parts.example/</loc>
+    <loc>https://www.vipauto.sn/</loc>
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://atlas-auto-parts.example/shop</loc>
+    <loc>https://www.vipauto.sn/services</loc>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://atlas-auto-parts.example/about</loc>
+    <loc>https://www.vipauto.sn/shop</loc>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.vipauto.sn/about</loc>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://atlas-auto-parts.example/contact</loc>
+    <loc>https://www.vipauto.sn/contact</loc>
     <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.vipauto.sn/products/huile-moteur-shell-helix-hx5-15w40-5l</loc>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.vipauto.sn/products/huile-moteur-lukoil-luxe-10w40-5l</loc>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.vipauto.sn/products/huile-moteur-pemco-330-5w30-5l</loc>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.vipauto.sn/products/huile-moteur-mannol-classic-10w40-5l</loc>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.vipauto.sn/products/huile-moteur-ardeca-synth-dx-5w30-1l</loc>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.vipauto.sn/products/huile-moteur-urus-hd50-monograde-1l</loc>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.vipauto.sn/products/huile-transmission-kansler-atf-dexron-iii-1l</loc>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.vipauto.sn/products/huile-transmission-xenum-xa-tran-cvt-1l</loc>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.vipauto.sn/products/huile-transmission-chevrotech-v8-cvtf-1l</loc>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.vipauto.sn/products/huile-transmission-pemco-465-atf-d-vi-1l</loc>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.vipauto.sn/products/filtre-a-huile-cartouche</loc>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.vipauto.sn/products/bougie-allumage-ngk-laser-iridium</loc>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.vipauto.sn/products/bougie-allumage-land-rover-origine</loc>
+    <priority>0.8</priority>
   </url>
 </urlset>

@@ -1,7 +1,7 @@
 import { Link } from "@tanstack/react-router";
-import { Menu, MessageCircle, ShoppingCart, X } from "lucide-react";
+import { CalendarCheck, Lock, Menu, ShoppingCart, X } from "lucide-react";
 import { useState } from "react";
-import { contactInfo } from "../data/catalog";
+import { useAppointment } from "../lib/appointment";
 import { useCart } from "../lib/cart";
 
 type HeaderProps = {
@@ -10,11 +10,12 @@ type HeaderProps = {
 
 type NavigationItem = {
   label: string;
-  to: "/" | "/shop" | "/about" | "/contact";
+  to: "/" | "/services" | "/shop" | "/about" | "/contact";
 };
 
 const navigationItems: NavigationItem[] = [
   { label: "Accueil", to: "/" },
+  { label: "Services", to: "/services" },
   { label: "Boutique", to: "/shop" },
   { label: "À propos", to: "/about" },
   { label: "Contact", to: "/contact" },
@@ -23,35 +24,33 @@ const navigationItems: NavigationItem[] = [
 export function Header({ onCartOpen }: HeaderProps): JSX.Element {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const { itemCount } = useCart();
+  const { openAppointment } = useAppointment();
 
   return (
     <header className="sticky top-0 z-40 border-b border-slate-200 bg-white/95 backdrop-blur">
       <div className="bg-ink text-white">
         <div className="mx-auto flex max-w-7xl flex-col gap-2 px-4 py-2 text-xs sm:flex-row sm:items-center sm:justify-between">
-          <p>Pièces contrôlées, livraison rapide et paiement à la réception.</p>
-          <a
+          <p>Centre d'entretien auto à Dakar · Rendez-vous rapide sur WhatsApp.</p>
+          <button
+            type="button"
             className="inline-flex items-center gap-2 font-semibold text-amber-300 transition hover:text-white"
-            href={`https://wa.me/${contactInfo.whatsapp}`}
+            onClick={() => openAppointment()}
           >
-            <MessageCircle className="h-4 w-4" aria-hidden="true" />
-            Conseil WhatsApp
-          </a>
+            <CalendarCheck className="h-4 w-4" aria-hidden="true" />
+            Prendre rendez-vous
+          </button>
         </div>
       </div>
 
       <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-4">
-        <Link className="flex items-center gap-3" to="/" aria-label="Retour à l'accueil">
-          <span className="flex h-11 w-11 items-center justify-center rounded bg-signal text-lg font-black text-white">
-            AP
-          </span>
-          <span>
-            <span className="block text-lg font-black uppercase leading-none tracking-normal text-ink">
-              Atlas Auto Parts
-            </span>
-            <span className="text-xs font-semibold uppercase tracking-normal text-slate-500">
-              Pièces auto premium
-            </span>
-          </span>
+        <Link className="flex items-center" to="/" aria-label="VIP AUTO — Accueil">
+          <img
+            className="h-11 w-auto rounded md:h-12"
+            src="/images/logo-vip.png"
+            alt="VIP AUTO — Pièces auto, entretien, performance"
+            width="760"
+            height="364"
+          />
         </Link>
 
         <nav className="hidden items-center gap-8 md:flex" aria-label="Navigation principale">
@@ -69,6 +68,14 @@ export function Header({ onCartOpen }: HeaderProps): JSX.Element {
 
         <div className="flex items-center gap-2">
           <button
+            type="button"
+            className="hidden min-h-11 items-center justify-center gap-2 rounded bg-signal px-4 text-sm font-black uppercase tracking-normal text-white transition hover:bg-red-700 active:scale-[0.98] md:inline-flex"
+            onClick={() => openAppointment()}
+          >
+            <CalendarCheck className="h-4 w-4" aria-hidden="true" />
+            Prendre RDV
+          </button>
+          <button
             className="relative inline-flex h-11 w-11 items-center justify-center rounded border border-slate-200 bg-white text-ink transition hover:border-signal hover:text-signal"
             type="button"
             onClick={onCartOpen}
@@ -82,6 +89,14 @@ export function Header({ onCartOpen }: HeaderProps): JSX.Element {
               </span>
             ) : null}
           </button>
+          <Link
+            to="/admin/login"
+            className="inline-flex h-11 w-11 items-center justify-center rounded border border-slate-200 bg-white text-slate-400 transition hover:border-signal hover:text-signal"
+            aria-label="Espace administrateur"
+            title="Espace administrateur"
+          >
+            <Lock className="h-4 w-4" aria-hidden="true" />
+          </Link>
           <button
             className="inline-flex h-11 w-11 items-center justify-center rounded border border-slate-200 bg-white text-ink md:hidden"
             type="button"
@@ -109,6 +124,17 @@ export function Header({ onCartOpen }: HeaderProps): JSX.Element {
                 {item.label}
               </Link>
             ))}
+            <button
+              type="button"
+              className="mt-1 inline-flex min-h-12 items-center justify-center gap-2 rounded bg-signal px-4 py-3 text-sm font-black uppercase tracking-normal text-white transition hover:bg-red-700"
+              onClick={() => {
+                setIsMenuOpen(false);
+                openAppointment();
+              }}
+            >
+              <CalendarCheck className="h-4 w-4" aria-hidden="true" />
+              Prendre rendez-vous
+            </button>
           </div>
         </nav>
       ) : null}
